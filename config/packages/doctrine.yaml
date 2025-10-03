@@ -1,0 +1,22 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver: 'pdo_pgsql'
+                url: '%env(resolve:DATABASE_URL)%'
+                server_version: '15'
+        types:
+            uuid: Symfony\Bridge\Doctrine\Types\UuidType
+    orm:
+        default_entity_manager: default
+        entity_managers:
+            default:
+                mappings:
+                    App:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: App
+                        mapping: true

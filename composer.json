@@ -7,14 +7,19 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
+        "doctrine/orm": "*",
+        "shared/shared-bundle": "dev-main",
         "symfony/console": "6.4.*",
         "symfony/dotenv": "6.4.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.4.*",
+        "symfony/messenger": "6.4.*",
         "symfony/runtime": "6.4.*",
+        "symfony/uid": "6.4.*",
+        "symfony/validator": "6.4.*",
         "symfony/yaml": "6.4.*"
-    },
-    "require-dev": {
     },
     "config": {
         "allow-plugins": {
@@ -63,5 +68,14 @@
             "allow-contrib": false,
             "require": "6.4.*"
         }
-    }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.64"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/arman424/product-shared-bundle.git"
+        }
+    ]
 }

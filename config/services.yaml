@@ -22,3 +22,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Enable autowiring for actions (explicit registration for ProductCreateAction)
+    App\Action\ProductCreateAction:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+imports:
+    - { resource: '../vendor/shared/shared-bundle/src/Resources/config/services.yaml' }
