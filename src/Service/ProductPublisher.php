@@ -12,6 +12,6 @@ class ProductPublisher
 
     public function publish(ProductDTO $dto): void
     {
-        $this->publisher->publish('product_queue', $dto->toArray());
+        $this->publisher->publish($dto);
     }
 }

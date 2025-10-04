@@ -10,9 +10,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class ProductGetAction
 {
-    public function __invoke(string $id, EntityManagerInterface $em): JsonResponse
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {}
+
+    public function __invoke(string $id): JsonResponse
     {
-        $product = $em->getRepository(Product::class)->find($id);
+        $product = $this->entityManager->getRepository(Product::class)->find($id);
         if (!$product) {
             return new JsonResponse(['error' => 'Product not found'], 404);
         }

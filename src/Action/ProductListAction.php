@@ -10,12 +10,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class ProductListAction
 {
-    public function __invoke(EntityManagerInterface $em): JsonResponse
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {}
+
+    public function __invoke(): JsonResponse
     {
-        $products = $em->getRepository(Product::class)->findAll();
+        $products = $this->entityManager->getRepository(Product::class)->findAll();
         $data = array_map(fn($p) => ProductDTO::fromEntity($p), $products);
 
         return new JsonResponse(['data' => $data]);
     }
 }
-

@@ -1,6 +1,11 @@
 framework:
     messenger:
         transports:
-            rabbitmq: '%env(MESSENGER_TRANSPORT_DSN)%'
+            product_transport:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                serializer: messenger.transport.symfony_serializer
+                options:
+                    queues:
+                        product_queue: ~
         routing:
-        # ...your message classes mapped to transports...
+            Shared\Bundle\Messaging\ProductMessage: product_transport

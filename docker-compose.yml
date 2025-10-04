@@ -1,4 +1,6 @@
-version: '3.8'
+networks:
+  app_network:
+    external: true
 
 services:
   product_service:
@@ -8,17 +10,18 @@ services:
     container_name: product_service
     depends_on:
       - product_db
-      - rabbitmq
     environment:
       APP_ENV: dev
       DATABASE_URL: "postgresql://symfony:symfony@product_db:5432/product_db?serverVersion=15&charset=utf8"
-      MESSENGER_TRANSPORT_DSN: amqp://guest:guest@rabbitmq:5672/%2f/messages
+      MESSENGER_TRANSPORT_DSN: amqp://guest:guest@rabbitmq:5672/%2f
     ports:
       - "8000:8000"
     volumes:
       - .:/app
       - ./extend-php.ini:/usr/local/etc/php/conf.d/extend-php.ini
     command: php -S 0.0.0.0:8000 -t public
+    networks:
+      - app_network
 
   product_db:
     image: postgres:15
@@ -31,16 +34,8 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - app_network
 
 volumes:
   db_data:
