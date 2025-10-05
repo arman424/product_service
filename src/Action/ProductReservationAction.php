@@ -23,7 +23,11 @@ final class ProductReservationAction
     {
         $product = $this->em->getRepository(Product::class)->find($event->productId);
 
-        if ($product && $product->getQuantity() >= $event->quantity) {
+        if (!$product) {
+            throw new \Exception('Product not found in order service: ' . $event->productId);
+        }
+
+        if ($product->getQuantity() >= $event->quantity) {
             $product->setQuantity($product->getQuantity() - $event->quantity);
             $this->em->flush();
 
@@ -38,7 +42,8 @@ final class ProductReservationAction
             $this->productOutOfStockPublisher->publish(
                 ProductOutOfStockDTO::init([
                     'orderId' => $event->orderId,
-                    'quantity' => $event->quantity,
+                    'productId' => $event->productId,
+                    'quantity' => $product->getQuantity(),
                 ])
             );
         }

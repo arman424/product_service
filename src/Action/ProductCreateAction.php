@@ -37,8 +37,10 @@ final class ProductCreateAction
         $product = new Product();
         $product->setId(Uuid::v4());
         $product->setName($request->name);
-        //Should be integer in cents to avoid float precision issues
-        //TODO MoneyObject library can be used here
+
+        // Price stored as integer to avoid floating-point precision issues.
+        // TODO: Consider using a dedicated Money object for more robust handling.
+
         $product->setPrice((int) $request->price);
         $product->setQuantity($request->quantity);
 
