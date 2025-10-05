@@ -1910,12 +1910,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arman424/product-shared-bundle.git",
-                "reference": "d7adac9c866989060088c756b5157dd54db59f1d"
+                "reference": "03315648d6bdde2678808a31e05925cc0d81490d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arman424/product-shared-bundle/zipball/d7adac9c866989060088c756b5157dd54db59f1d",
-                "reference": "d7adac9c866989060088c756b5157dd54db59f1d",
+                "url": "https://api.github.com/repos/arman424/product-shared-bundle/zipball/03315648d6bdde2678808a31e05925cc0d81490d",
+                "reference": "03315648d6bdde2678808a31e05925cc0d81490d",
                 "shasum": ""
             },
             "require": {
@@ -1939,7 +1939,7 @@
                 "source": "https://github.com/arman424/product-shared-bundle/tree/main",
                 "issues": "https://github.com/arman424/product-shared-bundle/issues"
             },
-            "time": "2025-10-04T10:18:10+00:00"
+            "time": "2025-10-05T12:34:37+00:00"
         },
         {
             "name": "symfony/amqp-messenger",

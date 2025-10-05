@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use Shared\Bundle\DTO\ProductDTO;
-use Shared\Bundle\RabbitMQ\PublisherInterface;
+use Shared\Bundle\Messaging\ProductMessage;
+use Shared\Bundle\Publisher\Publisher;
+use Shared\Bundle\DTO\PublishedDTOInterface;
 
-class ProductPublisher
+class ProductPublisher extends Publisher
 {
-    public function __construct(private readonly PublisherInterface $publisher) {}
-
-    public function publish(ProductDTO $dto): void
+    public function publish(PublishedDTOInterface $publishedDTO): void
     {
-        $this->publisher->publish($dto);
+        $this->messageBus->dispatch(new ProductMessage($publishedDTO));
     }
 }

@@ -29,5 +29,9 @@ services:
         autoconfigure: true
         public: true
 
+    App\MessageHandler\:
+        resource: '../src/MessageHandler'
+        tags: ['messenger.message_handler']
+
 imports:
     - { resource: '../vendor/shared/shared-bundle/src/Resources/config/services.yaml' }
