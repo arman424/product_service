@@ -14,8 +14,9 @@ class ProductReserveHandler
         private ProductReservationAction $productReservationAction,
     ) {}
 
-    public function __invoke(OrderMessage $event): void
+    public function __invoke(OrderMessage $message): void
     {
+        $event = $message->orderReservationDTO;
         ($this->productReservationAction)($event);
     }
 }

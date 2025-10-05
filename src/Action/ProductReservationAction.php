@@ -8,7 +8,7 @@ use App\Service\ProductReservedPublisher;
 use Doctrine\ORM\EntityManagerInterface;
 use Shared\Bundle\DTO\OrderReservationDTO;
 use Shared\Bundle\DTO\ProductOutOfStockDTO;
-use Shared\Bundle\Messaging\OrderMessage;
+use Shared\Bundle\DTO\PublishedDTOInterface;
 
 final class ProductReservationAction
 {
@@ -18,10 +18,8 @@ final class ProductReservationAction
         private ProductOutOfStockPublisher $productOutOfStockPublisher
     ) {}
 
-    public function __invoke(OrderMessage $message): void
+    public function __invoke(PublishedDTOInterface $event): void
     {
-        $event = $message->orderReservationDTO;
-
         $product = $this->em->getRepository(Product::class)->find($event->productId);
 
         if ($product && $product->getQuantity() >= $event->quantity) {
