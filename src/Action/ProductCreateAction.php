@@ -12,7 +12,7 @@ use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class ProductCreateAction
+final class ProductCreateAction
 {
     public function __construct(
         private EntityManagerInterface $em,
