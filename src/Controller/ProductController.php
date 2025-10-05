@@ -31,6 +31,8 @@ class ProductController extends AbstractController
                 $errors[$violation->getPropertyPath()][] = $violation->getMessage();
             }
             return $this->json(['errors' => $errors], 422);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Internal Server Error'], 500);
         }
 
         return $this->json($product);
