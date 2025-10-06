@@ -8,6 +8,17 @@ use Shared\Bundle\Entity\MappedSuperclass\Product as BaseProduct;
 
 #[ORM\Entity]
 #[ORM\Table(name: "products")]
-class Product extends BaseProduct {}
+class Product extends BaseProduct
+{
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'price' => $this->getPrice(),
+            'quantity' => $this->getQuantity(),
+        ];
+    }
+}
 
 

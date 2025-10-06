@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 class ProductReserveHandler
 {
     public function __construct(
-        private ProductReservationAction $productReservationAction,
+        private readonly ProductReservationAction $productReservationAction,
     ) {}
 
     public function __invoke(OrderMessage $message): void

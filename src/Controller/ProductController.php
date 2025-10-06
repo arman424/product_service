@@ -9,7 +9,6 @@ use App\Action\ProductListAction;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
@@ -23,19 +22,7 @@ class ProductController extends AbstractController
     #[Route('/products', methods: ['POST'])]
     public function create(Request $request, ): JsonResponse
     {
-        try {
-            $product = ($this->productCreateAction)($request->getContent());
-        } catch (ValidationFailedException $e) {
-            $errors = [];
-            foreach ($e->getViolations() as $violation) {
-                $errors[$violation->getPropertyPath()][] = $violation->getMessage();
-            }
-            return $this->json(['errors' => $errors], 422);
-        } catch (\Exception $e) {
-            return $this->json(['error' => 'Internal Server Error'], 500);
-        }
-
-        return $this->json($product);
+        return ($this->productCreateAction)($request->getContent());
     }
 
     #[Route('/products', methods: ['GET'])]
